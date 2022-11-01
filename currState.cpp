@@ -85,6 +85,17 @@ class State
     return false;
   }
 
+//checks if the state is equal to the goal state
+  bool isGoal()
+  {
+    for(unsigned i=0; i<currState.size(); i++)
+    {
+      if(currState.at(i)!= i)
+        return false;
+    }
+    return true;
+  }
+
 //displays the puzzle in a matrix format
   void display()
   {
@@ -134,6 +145,9 @@ int main()
     
     State *c3 = new State();
     c3->display();
+
+    cout << "IS C1 = goal? " << c1->isGoal() << endl;
+    cout << "IS C3 = goal? " << c1->isGoal() << endl;
     */
 
    return 0;
