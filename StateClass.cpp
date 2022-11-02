@@ -114,13 +114,25 @@ class State
     }
     cout << "\n";
   }
+
+//Calculates how many tiles are not in their correct place
+  int misplacedTile(State* x) 
+  {
+    int counter = 0;
+    for(unsigned i =0; i< x->currState.size(); i++)
+    {
+      if(x->currState.at(i) != i)
+        counter++;
+    }
+    return counter;
+  }
 };
 
 
 int main()
 { 
 
-    /*Testing for states class
+    //Testing for states class
     vector<int> v;
     vector<int> v2;
 
@@ -146,9 +158,19 @@ int main()
     State *c3 = new State();
     c3->display();
 
-    cout << "IS C1 = goal? " << c1->isGoal() << endl;
-    cout << "IS C3 = goal? " << c1->isGoal() << endl;
-    */
+    cout << "IS C1 = goal? " << c->isGoal() << endl;
+    cout << "IS C3 = goal? " << c3->isGoal() << endl << endl;
+    
+    for(unsigned i=0; i<8; i++)
+    {
+      v.at(i) = i+1;
+    }
+    State *c4 = new State(v);
+    c4->display();
+    cout << "Misplaced tile C1: " <<c->misplacedTile(c) << endl;
+    cout << "Misplaced tile C1: " <<curr->misplacedTile(curr) << endl;
+    cout << "Misplaced tile C1: " <<c3->misplacedTile(c3) << endl;
+    cout << "Misplaced tile C1: " <<c4->misplacedTile(c4) << endl;
 
    return 0;
 }
