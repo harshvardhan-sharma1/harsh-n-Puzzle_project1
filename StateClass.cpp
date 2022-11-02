@@ -128,6 +128,67 @@ class State
     }
     return counter;
   }
+
+  int manhattan(State* x)
+  {
+    //1 --- Making goal state
+    vector< vector<int> > goalState(x->currState.size());
+    int row_size = static_cast<int> ((log2(x->currState.size())));
+    int col_size = x->currState.size() / row_size;
+    vector<int> row (row_size);
+    vector< vector<int> > puzzle(x->currState.size());
+    vector<int> x_row(row_size);
+    unsigned int k=1;
+    for(unsigned i=0; i<row_size; i++)
+    {
+      for(unsigned j =0; j<col_size; j++)
+      {
+        row.at(j)=k;
+        x_row.at(j) = x->currState.at(k-1);
+        k++;
+      }
+      goalState.at(i) = row;
+      puzzle.at(i) = x_row;
+    }
+    goalState.at(row_size-1).at(col_size-1) = 0;
+    
+    // cout << "\n\n\n";
+    // for(unsigned i=0; i<row_size; i++)
+    // {
+    //   for(unsigned j =0; j<col_size; j++)
+    //   {
+    //     cout << puzzle.at(i).at(j) <<"," << goalState.at(i).at(j) << '\t';
+    //   }
+    //   cout << endl;
+    // }
+
+    //2 -- Calculating Manhattan Distance
+    int dist=0;
+
+    for(int i=0; i<row_size; i++)
+    {
+    for(int j=0; j<col_size; j++)
+    {
+      if(puzzle.at(i).at(j)!=0)
+      {
+        for(int m=0; m<row_size; m++)
+        {
+        for(int n=0; n<col_size; n++)
+        {
+          if(puzzle.at(i).at(j) == goalState.at(m).at(n))
+          {
+            dist += abs(i-m) + abs(j-n);
+            // continue;
+          }
+        }
+        }
+      }
+    }
+    }
+	
+	  return dist;
+  }
+
 };
 
 
@@ -149,38 +210,46 @@ int main()
     }
     v2.push_back(0);
 
-    State *curr = new State(v);
-    cout << "\nC2:\n";
-    curr->display();
-    cout << "\n\n\n";
-
-
     State *c = new State(v2);
-    cout << "\nC1:\n";
-    c->display();
-    cout << "\n\n\n";
-
-    // cout << "\n\nV2 == V ?? --> " << (v2==v) << " | V2!=V ?? --> " << (v2!=v) << "\n";
-    
+    State *curr = new State(v);
     State *c3 = new State(v2);
-    cout << "\nC3:\n";
-    c3->display();
-    cout << "\n\n\n";
-
-    // cout << "IS C1 = goal? " << c->isGoal() << endl;
-    // cout << "IS C3 = goal? " << c3->isGoal() << endl << endl;
-    
     for(unsigned i=0; i<8; i++)
     {
       v.at(i) = i+1;
     }
     v.at(v.size()-1) = 0;
     State *c4 = new State(v);
-    c4->display();
-    cout << "Misplaced tile C1: " <<c->misplacedTile(c) << endl;
-    cout << "Misplaced tile C2: " <<curr->misplacedTile(curr) << endl;
-    cout << "Misplaced tile C3: " <<c3->misplacedTile(c3) << endl;
-    cout << "Misplaced tile C4: " <<c4->misplacedTile(c4) << endl;
+
+    // cout << "\nC1:\n";
+    // c->display();
+    // cout << "\n\n\n";
+    
+    // cout << "\nC2:\n";
+    // curr->display();
+    // cout << "\n\n\n";
+        
+    // cout << "\nC3:\n";
+    // c3->display();
+    // cout << "\n\n\n";
+
+    // cout << "\nC4:\n";
+    // c4->display();
+    // cout << "\n\n\n";
+
+    // cout << "\n\nV2 == V ?? --> " << (v2==v) << " | V2!=V ?? --> " << (v2!=v) << "\n";
+    // cout << "IS C1 = goal? " << c->isGoal() << endl;
+    // cout << "IS C3 = goal? " << c3->isGoal() << endl << endl;
+    
+    // cout << "Misplaced tile C1: " <<c->misplacedTile(c) << endl;
+    // cout << "Misplaced tile C2: " <<curr->misplacedTile(curr) << endl;
+    // cout << "Misplaced tile C3: " <<c3->misplacedTile(c3) << endl;
+    // cout << "Misplaced tile C4: " <<c4->misplacedTile(c4) << endl;
+
+
+    vector<int> a = {1,2,4,3,0,6,7,8,5};
+    State *x = new State(a);
+    x->display();
+    cout << "Manhattan for X: " << x->manhattan(x) << endl;
 
    return 0;
 }
