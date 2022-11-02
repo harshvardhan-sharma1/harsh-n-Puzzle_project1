@@ -25,7 +25,7 @@ class State
 //default constructor for known size
   State(unsigned  int n) : n(n+1)
   {
-    for (unsigned i = 0; i < n+1; i++)
+    for (unsigned i = 0; i < n; i++)
     {
       currState.at(i)= i;
     }
@@ -107,9 +107,9 @@ class State
 //checks if the state is equal to the goal state
   bool isGoal()
   {
-    for(unsigned i=0; i<currState.size(); i++)
+    for(unsigned i=0; i<currState.size()-1; i++)
     {
-      if(currState.at(i)!= i)
+      if(currState.at(i)!= i+1)
         return false;
     }
     return true;
@@ -119,7 +119,8 @@ class State
   void display()
   {
     // int row_size = static_cast<int> (ceil(log2(currState.size())));
-    int row_size = static_cast<int> ((log2(currState.size())));
+    // int row_size = static_cast<int> ((log2(currState.size())));
+    int row_size = static_cast<int>(sqrt(currState.size()));
     int r =0;
     for(unsigned i=0; i<currState.size(); i++)
     {
@@ -215,31 +216,31 @@ int main()
 { 
 
     //Testing for states class
-    vector<int> v;
-    vector<int> v2;
+    // vector<int> v;
+    // vector<int> v2;
 
-    for(unsigned i=0; i<8; i++)
-    {
-        v.push_back(i+1);
-    }
-    v.push_back(0);
-    for(int i=7; i>=0; i--)
-    {
-        v2.push_back(i+1);
-    }
-    v2.push_back(0);
+    // for(unsigned i=0; i<8; i++)
+    // {
+    //     v.push_back(i+1);
+    // }
+    // v.push_back(0);
+    // for(int i=7; i>=0; i--)
+    // {
+    //     v2.push_back(i+1);
+    // }
+    // v2.push_back(0);
 
-    State *c = new State(v2);
-    State *curr = new State(v);
-    State *c3 = new State(v2);
-    for(unsigned i=0; i<8; i++)
-    {
-      v.at(i) = i+1;
-    }
-    v.at(v.size()-1) = 0;
-    State *c4 = new State(v);
+    // State *c = new State(v2);
+    // State *curr = new State(v);
+    // State *c3 = new State(v2);
+    // for(unsigned i=0; i<8; i++)
+    // {
+    //   v.at(i) = i+1;
+    // }
+    // v.at(v.size()-1) = 0;
+    // State *c4 = new State(v);
 
-    //--------------- BASIC TESTS ---------------
+    // //--------------- BASIC TESTS ---------------
     // cout << "\nC1:\n";
     // c->display();
     // cout << "\n\n\n";
@@ -258,7 +259,9 @@ int main()
 
     // cout << "\n\nV2 == V ?? --> " << (v2==v) << " | V2!=V ?? --> " << (v2!=v) << "\n";
     // cout << "IS C1 = goal? " << c->isGoal() << endl;
-    // cout << "IS C3 = goal? " << c3->isGoal() << endl << endl;
+    // cout << "IS C2 = goal? " << curr->isGoal() << endl;
+    // cout << "IS C3 = goal? " << c3->isGoal() << endl;
+    // cout << "IS C4 = goal? " << c4->isGoal() << endl << endl;
     
     // cout << "Misplaced tile C1: " <<c->misplacedTile(c) << endl;
     // cout << "Misplaced tile C2: " <<curr->misplacedTile(curr) << endl;
