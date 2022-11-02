@@ -84,6 +84,25 @@ class State
 
     return false;
   }
+  
+  //Finds the index of an empty tile
+  int findEmptyTile()
+  {
+    for(unsigned i=0; i<currState.size(); i++)
+    {
+      if(currState.at(i)==0)
+        return i;
+    } 
+    return currState.size() -1;
+  }
+
+  //Swaps the value at two indices
+  void Swap(int a, int b)
+  {
+    int temp = currState.at(a);
+    currState.at(a)  = b;
+    currState.at(b) = temp;
+  }
 
 //checks if the state is equal to the goal state
   bool isGoal()
