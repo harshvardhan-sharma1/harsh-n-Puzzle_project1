@@ -123,7 +123,7 @@ class State
       counter++;
     for(unsigned i =0; i< x->currState.size()-1; i++)
     {
-      if(x->currState.at(i) != i+1)
+      if(x->currState.at(i) != i+1 && x->currState.at(i)!=0)
         counter++;
     }
     return counter;
@@ -220,6 +220,7 @@ int main()
     v.at(v.size()-1) = 0;
     State *c4 = new State(v);
 
+    //--------------- BASIC TESTS ---------------
     // cout << "\nC1:\n";
     // c->display();
     // cout << "\n\n\n";
@@ -245,11 +246,18 @@ int main()
     // cout << "Misplaced tile C3: " <<c3->misplacedTile(c3) << endl;
     // cout << "Misplaced tile C4: " <<c4->misplacedTile(c4) << endl;
 
+    //---------------Tests for Misplaced tiles and Manhattan heuristic---------------
+    // vector<int> a = {7,2,4,5,0,6,8,3,1};
+    // State *x = new State(a);
+    //  a = {1,2,4,3,0,6,7,8,5};
+    // State *y = new State(a);
+    // x->display();
+    // y->display();
+    // cout << "Misplaced tile for X: " << x->misplacedTile(x) << endl;
+    // cout << "Manhattan for X: " << x->manhattan(x) << endl;
+    // cout << "Misplaced tile for Y: " << y->misplacedTile(y) << endl;
+    // cout << "Manhattan for Y: " << y->manhattan(y) << endl;
 
-    vector<int> a = {1,2,4,3,0,6,7,8,5};
-    State *x = new State(a);
-    x->display();
-    cout << "Manhattan for X: " << x->manhattan(x) << endl;
 
    return 0;
 }
