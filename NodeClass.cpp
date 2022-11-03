@@ -4,7 +4,7 @@ class Node
 {
     public:
     State _state;
-    Node* parent;
+    shared_ptr<Node> parent;
     int depth;
     
     vector<Node*> children;
@@ -24,17 +24,17 @@ class Node
         depth = 0;
     }
 
-    Node(State& given, Node* p, int depth = 0) :_state(given), depth(depth)
+    Node(State& given, shared_ptr<Node> p, int depth = 0) :_state(given), depth(depth)
     {
         parent = p;
     }
 
-    void setParent(Node* p)
+    void setParent(shared_ptr<Node> p)
     {
         this->parent = p;
     }
 
-    Node* getParent()
+    shared_ptr<Node> getParent()
     {
         return parent;
     }
@@ -51,15 +51,21 @@ class Node
 
     void print()
     {
-        cout << "______Node{\n";
-        // for (unsigned int i = 0; i < _state->size(); ++i)
-        // {
-        //     cout << _state->currState.at(i);
-        // }
+        cout << "______\n";
         _state.display();
-        cout << "______Depth: " << depth << " }\n\n";
+        cout << "______\nDepth: " << depth << " }\n\n";
     }
 };
+
+bool isPresent(State& a, vector<shared_ptr<Node>>& list)
+{
+    for(unsigned i=0; i<list.size(); i++)
+    {
+        if(a == list.at(i)->getState())
+            return true;
+    }
+    return false;
+}
 
 int main()
 {
@@ -80,7 +86,6 @@ int main()
     n2.print();
     cout << "Manhattan for this: " << n2._state.manhattan(n2._state);
     cout << "\nMisplaced tile for this: " << n2._state.misplacedTile(n2._state);
-
     
     return 0;
 }
