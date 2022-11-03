@@ -1,3 +1,6 @@
+#ifndef __Node__
+#define __Node__
+
 #include "StateClass.cpp"
 
 class Node
@@ -89,8 +92,4 @@ int main()
     
     return 0;
 }
-
-class Tree
-{
-    
-};
+#endif

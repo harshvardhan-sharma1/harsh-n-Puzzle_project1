@@ -1,3 +1,6 @@
+#ifndef __STATE__
+#define __STATE__
+
 #include <vector>
 #include <cstdlib>
 #include <iostream>
@@ -302,3 +305,4 @@ int main()
    return 0;
 }
 */
+#endif
