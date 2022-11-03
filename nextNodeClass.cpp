@@ -1,6 +1,10 @@
 #ifndef __NextNode__
 #define __NextNode__
 
+#include <vector>
+#include <cstdlib>
+#include <iostream>
+#include <cmath>
 #include <map>
 #include "NodeClass.cpp"
 class nextNodeClass
@@ -25,7 +29,7 @@ void CreateGraphFor8Puzzle()
 		CreateGraphFor8Puzzle();
 	}
 
-	const vector<int>& getNextNode(int id) const
+	const vector<int> getNextNode(int id) const
 	{
 		availableIndex::const_iterator itr(_edges.find(id));
 		if (itr != _edges.end()) 

@@ -2,7 +2,10 @@
 #define __Node__
 
 #include "StateClass.cpp"
-
+#include <vector>
+#include <cstdlib>
+#include <iostream>
+#include <cmath>
 class Node
 {
     public:
@@ -58,38 +61,48 @@ class Node
         _state.display();
         cout << "______\nDepth: " << depth << " }\n\n";
     }
+
+//     bool isPresent(State& a, vector<shared_ptr<Node> >& list)
+// {
+//     for(unsigned i=0; i<list.size(); i++)
+//     {
+//         if(a == list.at(i)->getState())
+//             return true;
+//     }
+//     return false;
+// }
 };
 
-bool isPresent(State& a, vector<shared_ptr<Node>>& list)
-{
-    for(unsigned i=0; i<list.size(); i++)
-    {
-        if(a == list.at(i)->getState())
-            return true;
-    }
-    return false;
-}
+// bool isPresent(State& a, vector<shared_ptr<Node> >& list)
+// {
+//     for(unsigned i=0; i<list.size(); i++)
+//     {
+//         if(a == list.at(i)->getState())
+//             return true;
+//     }
+//     return false;
+// }
 
-int main()
-{
-    //1 -- Basic constructor test
-    vector<int> v;
-    for(unsigned i=0; i<9; i++)
-    {
-        v.push_back(i+1);
-    }
-    v.at(v.size()-1) = 0;
-    State _state(v);
-    Node n1(_state, nullptr, -1);
-    n1.print();
+// int main()
+// {
+//     //1 -- Basic constructor test
+//     vector<int> v;
+//     for(unsigned i=0; i<9; i++)
+//     {
+//         v.push_back(i+1);
+//     }
+//     v.at(v.size()-1) = 0;
+//     State _state(v);
+//     Node n1(_state, nullptr, -1);
+//     n1.print();
 
-    v = {1,2,4,3,0,6,7,8,5};
-    State __state(v);
-    Node n2(__state, nullptr, 0);
-    n2.print();
-    cout << "Manhattan for this: " << n2._state.manhattan(n2._state);
-    cout << "\nMisplaced tile for this: " << n2._state.misplacedTile(n2._state);
+//     v = {1,2,4,3,0,6,7,8,5};
+//     State __state(v);
+//     Node n2(__state, nullptr, 0);
+//     n2.print();
+//     cout << "Manhattan for this: " << n2._state.manhattan(n2._state);
+//     cout << "\nMisplaced tile for this: " << n2._state.misplacedTile(n2._state);
     
-    return 0;
-}
+//     return 0;
+// }
 #endif
