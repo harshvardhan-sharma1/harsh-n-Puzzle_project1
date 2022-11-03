@@ -12,20 +12,7 @@ private:
 	bool solved;
     
 public:
-	enum Type
-	{
-		DEPTH_FIRST = 0,
-		BREADTH_FIRST,
-		GREEDY_BEST_FIRST,
-		ASTAR,
-	};
-
-private:
-    Type _type;
-
-public:
-	Solve( State& first, const State& goal, Type type = Type::ASTAR)
-		: _goal(goal), solved(false), _type(type)
+	Solve( State& first, const State& goal) : _goal(goal), solved(false)
 	{
 		nodePtr root(new Node(first, nullptr, 0));
 		_openlist.push_back(root);
@@ -56,75 +43,7 @@ public:
 	}
 
 	///Returns next node in the search
-	nodePtr GetNextNode()
-	{
-		if (_openlist.empty()) 
-            return nullptr;
-		
-        nodePtr current;
-
-		switch (_type)
-		{
-		case ASTAR:
-		{
-			NodeList::iterator current_itr(std::min_element(
-				_openlist.begin(),
-				_openlist.end(),
-				CompareFunctorForAStar()));
-
-			if (current_itr == _openlist.end()) return 0;
-
-			//copy the value first to a shared pointer and then erase from the open list.
-			current = *current_itr;
-
-			// now erase from the open list.
-			_openlist.erase(current_itr);
-			_closedlist.push_back(current);
-
-			break;
-		}
-		case GREEDY_BEST_FIRST:
-		{
-			NodeList::iterator current_itr(std::min_element(
-				_openlist.begin(),
-				_openlist.end(),
-				CompareFunctorForGreedyBestFirst()));
-
-			if (current_itr == _openlist.end()) return 0;
-
-			//copy the value first to a shared pointer and then erase from the open list.
-			current = *current_itr;
-
-			// now erase from the open list.
-			_openlist.erase(current_itr);
-			_closedlist.push_back(current);
-
-			break;
-		}
-		case BREADTH_FIRST:
-		{
-			current = _openlist[0];
-			_openlist.erase(_openlist.begin());
-			_closedlist.push_back(current);
-
-			break;
-		}
-		case DEPTH_FIRST:
-			//current = _openlist[0];
-			NodeList::iterator current_itr(_openlist.begin());
-			if (current_itr == _openlist.end()) return 0;
-
-			//copy the value first to a shared pointer and then erase from the open list.
-			current = *current_itr;
-
-			// now erase from the open list.
-			_openlist.erase(current_itr);
-			_closedlist.push_back(current);
-
-			break;
-		}
-		return current;
-	}
+	
 
 	// expand the graph by looking into the neighbours for the given node.
 	void ExpandNode(nodePtr current, nextNodeClass& graph)
