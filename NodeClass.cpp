@@ -74,8 +74,14 @@ int main()
     Node n1(_state, nullptr, -1);
     n1.print();
 
+    v = {1,2,4,3,0,6,7,8,5};
+    State __state(v);
+    Node n2(__state, nullptr, 0);
+    n2.print();
+    cout << "Manhattan for this: " << n2._state.manhattan(n2._state);
+    cout << "\nMisplaced tile for this: " << n2._state.misplacedTile(n2._state);
 
-
+    
     return 0;
 }
 
