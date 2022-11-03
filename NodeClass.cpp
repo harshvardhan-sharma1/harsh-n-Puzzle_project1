@@ -51,29 +51,29 @@ class Node
 
     void print()
     {
-        cout << "Node {\n";
+        cout << "______Node{\n";
         // for (unsigned int i = 0; i < _state->size(); ++i)
         // {
         //     cout << _state->currState.at(i);
         // }
         _state.display();
-        cout << "Depth: " << depth << " }\n\n";
+        cout << "______Depth: " << depth << " }\n\n";
     }
 };
 
 int main()
 {
+    //1 -- Basic constructor test
     vector<int> v;
     for(unsigned i=0; i<9; i++)
     {
         v.push_back(i+1);
     }
     v.at(v.size()-1) = 0;
-    // Node *n1 = new Node(v);
-    // n1->print();
+    State _state(v);
+    Node n1(_state, nullptr, -1);
+    n1.print();
 
-    Node* n2;
-    n2->print();
 
 
     return 0;

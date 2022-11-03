@@ -142,13 +142,13 @@ class State
     int r =0;
     for(unsigned i=0; i<currState.size(); i++)
     {
-        cout << currState.at(i) << ' ';
-        r++;
-        if(r == row_size)
-        {
-            r =0;
-            cout << "\n";
-        }
+      cout << currState.at(i) << ' ';
+      r++;
+      if(r == row_size && i!=currState.size()-1)
+      {
+        r =0;
+        cout << "\n";
+      }
     }
     cout << "\n";
   }
