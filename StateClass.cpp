@@ -12,7 +12,7 @@ class State
 
   State()
   {
-    cout << "Enter the size of n-Puzzle\n";
+    cout << "Enter n for n-Puzzle\n";
     cin >> n;
 
     currState.resize(n+1);
@@ -25,6 +25,7 @@ class State
 //default constructor for known size
   State(unsigned  int n) : n(n+1)
   {
+    currState.resize(n);
     for (unsigned i = 0; i < n; i++)
     {
       currState.at(i)= i;
@@ -32,35 +33,33 @@ class State
   }
 
   //parameterized constructor (takes in values from a vector)
-  State(vector<int>& v) 
+  State(vector<int>& v) : n(v.size())
   {
-    n = v.size();
     currState = v;
   }
 
   ///copy constructor
-  State(const State& other)
+  State(const State& a)
   {
-    n = other.n;
-    currState = other.currState;
+    n = a.n;
+    currState = a.currState;
   }
 
-  ///assignment operator
-//   State& operator=(const State& other)
-//   {
-//     if (this != &other)
-//     {
-//       n = other.n;
-//       currState = other.currState;
-//     }
-//     return *this;
-//   }
+  //assignment operator
+  State& operator=(const State& other)
+  {
+    if (this != &other)
+    {
+      n = other.n;
+      currState = other.currState;
+    }
+    return *this;
+  }
 
   friend bool operator==(const State& one, const State& two)
   {
     if(one.currState.size() != two.currState.size())
         return false;
-
 
     for(unsigned i =0; i<one.currState.size(); i++)
     {
@@ -74,15 +73,24 @@ class State
   {
 
     if(one.currState.size() != two.currState.size())
-        return true;
+      return true;
 
     for(unsigned i =0; i<one.currState.size(); i++)
     {
-        if(one.currState.at(i) != two.currState.at(i))
-            return true;
+      if(one.currState.at(i) != two.currState.at(i))
+        return true;
     }
-
     return false;
+  }
+
+  int size()
+  {
+    return currState.size();
+  }
+
+  int at(int index)
+  {
+    return currState.at(index);
   }
   
   //Finds the index of an empty tile
@@ -113,6 +121,16 @@ class State
         return false;
     }
     return true;
+  }
+
+  vector<int>& getState()
+  {
+    return currState;
+  }
+
+  void SetState(vector<int>& v)
+  {
+    currState = v;
   }
 
 //displays the puzzle in a matrix format
@@ -149,6 +167,7 @@ class State
     return counter;
   }
 
+//Calculates the manhattan distance from goal state
   int manhattan(State* x)
   {
     //1 --- Making goal state
@@ -172,6 +191,7 @@ class State
     }
     goalState.at(row_size-1).at(col_size-1) = 0;
     
+    /*-- :Debugging: ---*/
     // cout << "\n\n\n";
     // for(unsigned i=0; i<row_size; i++)
     // {
@@ -205,15 +225,13 @@ class State
       }
     }
     }
-	
 	  return dist;
   }
-
 };
 
 
-int main()
-{ 
+// int main()
+// { 
 
     //Testing for states class
     // vector<int> v;
@@ -281,6 +299,6 @@ int main()
     // cout << "Manhattan for Y: " << y->manhattan(y) << endl;
 
 
-   return 0;
-}
+//    return 0;
+// }
 
